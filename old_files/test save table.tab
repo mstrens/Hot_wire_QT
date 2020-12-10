@@ -1,0 +1,25 @@
+[Table]
+tableyy = 1000.0
+tableyg = 20.0
+tableyd = 20.0
+cmaxy = 500.0
+cmaxz = 400.0
+vmaxy = 10.0
+vmaxz = 5.0
+theatingmax = 100.0
+tname = No table name
+tcomport = COM6
+tbaudrate = 9600
+tpreheat = 5.0
+tpostheat = 0.1
+vcut = 2.0
+gcodestart1 = G00
+gcodestart2 = 
+gcodestart3 = 
+gcodestart4 = 
+gcodeend1 = 
+gcodeend2 = 
+gcodeend3 = 
+gcodeend4 = 
+gcodeletters = XYZA
+
