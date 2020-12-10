@@ -18,26 +18,33 @@ In this python application you can
 - define the characteristics of your table (dimension, speed, com port, baudrate, ...)
 - define the characteristics of some material (high/low speeds, radiances, normal cutting speed)
 - upload ".dat" files for root and tip profiles
-- transform the profiles (chords, thickness, incidence, inverse, skin, smoothing, reducing points, ...)
+- transform the profiles (chords, thickness, incidence, inverse, skin covering, smoothing, reducing points, ...)
+- add/modify synchronisation points for complex profiles
 - define the dimensions and the position of the bloc on the table
 - directly control the CNC hot wire (connect to Grbl, unlock GRBL, Home, Move the 4 axis, make vertical/horizontal.inclined cuts, apply heat,...)
 - generate and save the gcode for cutting the profiles in the foam
+- generate Gcode to cut rectangular spar, circular slot, triangular cut for aileron
 - send the generated gcode to GRBL
 - save and reload previous projects, tables, materials
+- allows to import profiles having been created/modified by the powerful profile editor named complexes.exe
+
+Note: at startup, the program tries to upload a project named "startup.ini" (in the same directory).
+You can just save one of your project under this name, if you want to use this project as default (including the table and matterial set up)  
 
 For Windows 10 64 bits, a full compiled version is available as an .exe on github in the "dist" forlder.
 This version can be run without installing other packages.
-It could be that it run on oldier version of Windows too (not tested)
+Some users says that it could run on oldier version of Windows too
 
-In order to run the application on other operating system, you have to install:
+In order to run the application on other operating systems, you have to install:
 - python 3 latest version ( I tested it with version 3.7)
-- tkinter (normally already included in python)
-- mathplotlib
+- mathplotlib latest version
 - numpy
 - configparser
-- shapely
+- shapely (not sure it is really needed)
 - scipy
 - pyserial
+- pyQt5
+- pyqtgraph
 - time  (normally already included in python)
 - threading (normally already included in python)
 - atexit (normally already included in python)
@@ -45,18 +52,20 @@ In order to run the application on other operating system, you have to install:
 
 Here some screen shots (perhaps not the latest version but it gives a good idea of the functionalities)
 
-![Profil](https://github.com/mstrens/Hot_wire/blob/master/image/Profil.png)
+![Profil](https://github.com/mstrens/Hot_wire_QT/blob/main/image/Profil.png)
 
-![Transform](https://github.com/mstrens/Hot_wire/blob/master/image/Transform.png)
+![Transform](https://github.com/mstrens/Hot_wire_QT/blob/main/image/Transform.png)
 
-![Bloc](https://github.com/mstrens/Hot_wire/blob/master/image/Bloc.png)
+![Bloc](https://github.com/mstrens/Hot_wire_QT/blob/main/image/Bloc.png)
 
-![Margin](https://github.com/mstrens/Hot_wire/blob/master/image/Margin.png)
+![Material](https://github.com/mstrens/Hot_wire_QT/blob/main/image/Material.png)
 
-![Material](https://github.com/mstrens/Hot_wire/blob/master/image/Material.png)
+![Guillotine](https://github.com/mstrens/Hot_wire_QT/blob/main/image/Guillotine.png)
 
-![Guillotine](https://github.com/mstrens/Hot_wire/blob/master/image/Guillotine.png)
+![Cut_project](https://github.com/mstrens/Hot_wire_QT/blob/main/image/Cut%20project%20Top%20view.png)
 
-![Cut](https://github.com/mstrens/Hot_wire/blob/master/image/Cut.png)
+![Cut_project](https://github.com/mstrens/Hot_wire_QT/blob/main/image/Cut%20project%20RootTip%20view.png)
 
-![Table](https://github.com/mstrens/Hot_wire/blob/master/image/Table.png)
+![Cut_project](https://github.com/mstrens/Hot_wire_QT/blob/main/image/Cut%20spar.png)
+
+![Table](https://github.com/mstrens/Hot_wire_QT/blob/main/image/Table.png)
