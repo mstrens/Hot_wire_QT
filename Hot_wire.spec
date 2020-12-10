@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['Hot_wire.py'],
-             pathex=['C:\\Data\\Hot wire QT'],
+             pathex=['C:\\Data\\Hot wire QT\\Hot_wire_QT'],
              binaries=[],
              datas=[],
              hiddenimports=[],
