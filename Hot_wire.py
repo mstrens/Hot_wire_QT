@@ -32,6 +32,7 @@ from hot_wire_grbl import Grbl
 #from hot_wire_guillotine import Guillotine
 import re
 
+
 # to do: radiance should be reduced if heating exceed max!!!!!!!!!!
 # remove all print from debug
 # detecter comme erreur le fait de dépasser la chauffe max permise.
@@ -71,7 +72,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         self.initData()
         self.setupUi(self)
-        self.setWindowTitle("Hot wire cutter (version 0.1.f)")
+        self.setWindowTitle("Hot wire cutter (version 0.1.g)")
         self.tBaudrate.setCurrentText("115200")
         self.tComPort.setCurrentText('COM5')
         self.cbXLeadingCut.setCurrentText('Porportional tip dimensions')
@@ -446,7 +447,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             #print(str(self.plotCutView.viewRange()))
             aTopView = self.plotCutView.getAxis('bottom')
             aSideViewRoot = self.plotBlocSideViewRoot.getAxis('bottom')
-            print ("top view range=", aTopView.range[1] , " Side view range=", aSideViewRoot.range[1] )
+            #print ("top view range=", aTopView.range[1] , " Side view range=", aSideViewRoot.range[1] )
             if aTopView.range[1] > (self.tableYY.value()*1.5):
                 self.tabs.setCurrentIndex(5)
                 hot_wire_draw.drawBlocSideView(self)
@@ -689,8 +690,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def addSynchroPoints(self , x, y):
         #create a list with the synchronisation point (4 = synchro; 0 = no synchro, 10 = synchro and no radiance)
         #first and last points are synchronisation points
-        # point with the greatest X is also a synchro 
+        # this function add a point with the greatest X (it is also a synchro when there are no predefined synchro point  
         s = []
+        synchroCount = 0 #count the number of synchro code
         if len(x) > 0:
             s = [0] * len(x) # create a list with 0 every where
             if self.cbComplexProfiles.isChecked() == False: #for wing profiles, add a synscho at leading edge
@@ -702,17 +704,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     r = idxMax[0][0]
                     s[r] = 4
                 else:
-                    r=0 # not sure if it can happens    
-        return s        
+                    r=0 # not sure if it can happens  
+        return s      
 
     def fnComplexProfiles(self):
         if self.cbComplexProfiles.isChecked():
             self.covering.setEnabled(False)
+            self.covering.setValue(0) #added in version g
             self.keepChord.setEnabled(False)
             self.linePlotORoot.blockSignals(False)
             self.linePlotORootSynchro.blockSignals(False)   
             self.linePlotOTip.blockSignals(False)   
-            self.linePlotOTipSynchro.blockSignals(False)       
+            self.linePlotOTipSynchro.blockSignals(False)
+
         else:
             self.covering.setEnabled(True)
             self.keepChord.setEnabled(True)

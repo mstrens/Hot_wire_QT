@@ -64,8 +64,8 @@ def applyTransform(w):
             w.tRootX, w.tRootY , w.tRootS = changeNbrPoints(w.tRootX, w.tRootY, w.tRootS , w.nbrPoints.value(), w.repartition.value() )
             w.tTipX, w.tTipY , w.tTipS = changeNbrPoints(w.tTipX, w.tTipY , w.tTipS , w.nbrPoints.value(), w.repartition.value() )
         #w.lineTestPlot.setData(w.tRootX, w.tRootY)
-        # take care of covering
-        if w.covering.value() != 0:
+        # take care of covering : value is forced to 0 when complex profile box is checked
+        if w.covering.value() != 0: 
             #save a copy of txxxx before covering because we use it after synchro when Extend Chord is ON
             w.nRootX = np.copy(w.tRootX)
             w.nRootY = np.copy(w.tRootY)
@@ -73,12 +73,20 @@ def applyTransform(w):
             w.nTipY = np.copy(w.tTipY)
             w.tRootX , w.tRootY = applyOffset(w.nRootX, w.nRootY , w.covering.value())
             w.tTipX , w.tTipY = applyOffset(w.nTipX, w.nTipY , w.covering.value())
-        """
-        # insert synchro points if they do not yet exist
-        if len(w.tRootS) == 0 or len(w.tTipS) == 0:
-            w.tRootS = addSynchroPoints(w.tRootX, w.tRootY)
-            w.tTipS = addSynchroPoints(w.tTipX, w.tTipY)
-        """
+            # delete and recalculate synchro point when a covering exist because nbr of points can change
+            w.tRootS = []
+            w.tTipS = []
+            w.tRootS = w.addSynchroPoints(w.tRootX, w.tRootY)
+            w.tTipS = w.addSynchroPoints(w.tTipX, w.tTipY)
+            if len(w.tRootX)> 0:
+                w.tRootS[0] = 4
+                w.tRootS[-1] = 4
+            if len(w.tTipX)> 0:
+                w.tTipS[0] = 4
+                w.tTipS[-1] = 4
+            #w.oRootSynchroCount = w.tRootS.count(4) # count the number of synchro code  
+            #w.oTipSynchroCount = w.tTipS.count(4)
+        
         #self.printProfile("before simplify", self.app.tRootX , self.app.tRootY , self.app.tRootS)
         # reduce the number of points but keep the synchronisation; the parameter is the max error (in mm)
         if w.reducePoints.isChecked():

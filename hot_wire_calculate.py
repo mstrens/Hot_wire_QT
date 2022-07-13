@@ -89,6 +89,7 @@ def calculateRelativeHeigths (self , pX , pY ):
         r = idxMax[0][0]
         leadingh = pY[r] - pY[0]
     else:
+
         leadingh = 0     
     return maxh ,minh, leadingh
 
@@ -215,7 +216,7 @@ def calculateWireProfil(self):
         #print("Speed mm/sec", self.speed)        
         self.cutMsg.setText(self.warningMsg) 
         #print("Projection ", self.GX , self.DX , self.GY, self.DY)
-        #print("Projection ", self.GX , self.DX )
+        #print("Projection speed", self.speed  )
         #genère le Gcode
         # set G54 à la valeur actuelle, set absolu et mm, set feed rate, met en chauffe, attend 5 sec 
         # monte à la hauteur du ppremier point puis avance au premier point
@@ -427,7 +428,7 @@ def projectionAll(self, x1 , x2 , y1 , y2, lg, l, ld):
             if yd[i] < ydmin: ydmin = yd[i]
             if yd[i] > ydmax: ydmax = yd[i]
             if i > 0: #calculate speed on Y axis
-                #calculate legnth of segment
+                #calculate length of segment
                 dx1 = x1[i-1] - x1[i]
                 dy1 = y1[i-1] - y1[i]
                 dx2 = x2[i-1] - x2[i]
